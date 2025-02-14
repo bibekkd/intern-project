@@ -1,7 +1,7 @@
 // src/components/Layout/Layout.tsx
 import React from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { Compass, Gamepad2 } from 'lucide-react';
+import { Compass, Gamepad2, LightbulbIcon, RouteIcon } from 'lucide-react';
 
 export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const location = useLocation();
@@ -67,6 +67,28 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
           >
             <Gamepad2 className="w-5 h-5" />
             <span className="text-[10px]">Playground</span>
+          </Link>
+
+          <Link 
+            to="/roadmap" 
+            className={`flex flex-col items-center gap-0.5 px-6 py-1 rounded-lg
+              transition-colors ${location.pathname === '/roadmap' 
+                ? 'text-primary' 
+                : 'text-gray-400 hover:text-gray-300'}`}
+          >
+            <RouteIcon className="w-5 h-5" />
+            <span className="text-[10px]">Roadmap</span>
+          </Link>
+
+          <Link 
+            to="/question-prediction" 
+            className={`flex flex-col items-center gap-0.5 px-6 py-1 rounded-lg
+              transition-colors ${location.pathname === '/question-prediction' 
+                ? 'text-primary' 
+                : 'text-gray-400 hover:text-gray-300'}`}
+          >
+            <LightbulbIcon className="w-5 h-5" />
+            <span className="text-[10px]">Question Prediction</span>
           </Link>
         </div>
       </nav>

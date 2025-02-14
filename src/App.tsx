@@ -5,6 +5,8 @@ import { Layout } from './components/Layout/Layout';
 import { ExploreView } from './components/Explore/ExploreView';
 import { PlaygroundView } from './components/Playground/PlaygroundView';
 // import { TestView } from './components/Test/TestView';
+import { RoadmapView } from './components/Roadmap/RoadmapView';
+import { QuestionPredictionView } from './components/QuestionPrediction/QuestionPredictionView';
 import { PreFillForm } from './components/shared/PreFillForm';
 import { UserContext } from './types';
 import { Toaster, toast } from 'react-hot-toast';
@@ -65,6 +67,8 @@ function App() {
                 />
               } 
             /> */}
+            <Route path="/roadmap" element={<RoadmapView />} />
+            <Route path="/question-prediction" element={<QuestionPredictionView />} />
           </Routes>
         </Layout>
       </div>
