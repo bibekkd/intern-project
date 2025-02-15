@@ -226,15 +226,26 @@ export const ExploreView: React.FC<ExploreViewProps> = ({
   // Loading history on mount
   useEffect(() => {
     const savedHistory = storageService.getHistory() || [];
-    setHistory(savedHistory);
-  }, []);
+    
+    const validHistory = savedHistory
+    .filter((item: any) => item && item.query && (item.timeStamp || item.timestamp))
+    .map((item: any) => ({
+      
+      query: item.query,
+      timestamp: typeof item.timestamp === 'number' ? item.timestamp : Date.now()
+    }));
+  setHistory(validHistory);
+}, []);
 
-  const updateHistory = useCallback((query: string) => {
-    const newHistoryItem = { query, timestamp: Date.now() };
-    const updatedHistory = [newHistoryItem, ...history.slice(0, 9)]; // Keep last 10 items
-    storageService.addToHistory(updatedHistory);
-    setHistory(updatedHistory);
-  }, [history]);
+const updateHistory = useCallback((query: string) => {
+  const newHistoryItem: HistoryItem = {
+    query,
+    timeStamp: Date.now()
+  };
+  const updatedHistory = [newHistoryItem, ...history.slice(0, 9)]; // Keep last 10 items
+  storageService.addToHistory(updatedHistory);
+  setHistory(updatedHistory);
+}, [history]);
 
 
   const handleSearch = useCallback(async (query: string) => {
@@ -321,7 +332,7 @@ export const ExploreView: React.FC<ExploreViewProps> = ({
                 {item.query}
               </span>
               <span className="text-xs text-gray-400 flex-shrink-0">
-                {formatDistanceToNow(item.timestamp, { addSuffix: true })}
+                {formatDistanceToNow(item.timeStamp, { addSuffix: true })}
               </span>
             </button>
           ))}

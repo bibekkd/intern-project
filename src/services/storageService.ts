@@ -1,6 +1,5 @@
 // src/services/storageService.ts
 
-import { times } from "lodash";
 
 interface UserInfo {
     age: number;
